@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const producer = require('../message_producer')
+const producer = require('../main_producer')
 
 router.post('/order', (request, res, next) => {
     /* 	#swagger.tags = ['Order place']
