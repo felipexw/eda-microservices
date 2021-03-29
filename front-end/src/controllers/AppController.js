@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const authorize = require('../middlewares/auth')
+
+const producer = require('../../message_producer')
 
 router.post('/order', (request, res, next) => {
     /* 	#swagger.tags = ['Order place']
@@ -17,15 +18,15 @@ router.post('/order', (request, res, next) => {
             "apiKeyAuth": []
     }] */
     const order = request.body
-    Object.keys(request)
-    setTimeout(() => {
-        console.log(`order placed successfully. OrderId: ${order.id}`)
 
-        res.status(200).json({
-            data: order,
-            message: 'Successfully found'
-        })
-    }, 1750)
+    console.log(`order placed successfully. OrderId: ${order.id}`)
+
+    producer.produceMessage(order);
+
+    res.status(200).json({
+        data: order,
+        message: 'Successfully found'
+    })
 })
 
 module.exports = router
