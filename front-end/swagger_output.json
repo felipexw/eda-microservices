@@ -81,6 +81,10 @@
         "product": {
           "type": "string",
           "example": "Product/service"
+        },
+        "reject": {
+          "type": "string",
+          "example": "order.inventory"
         }
       }
     }

@@ -32,7 +32,8 @@ const doc = {
             date: "22/02/2021",
             total: 213,
             id: 2123,
-            product: "Product/service"
+            product: "Product/service",
+            reject: "order.inventory"
         }
     }
 }
