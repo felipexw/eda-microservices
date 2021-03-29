@@ -1,7 +1,7 @@
 const amqp = require('amqplib/callback_api');
 const opt = { credentials: require('amqplib').credentials.plain('root', 'root') };
 const exchangeName = 'order_exchange';
-const delay = 1250;
+const orderPlaceStartTopic = 'order.place.start';
 
 module.exports = {
     produceMessage(message) {
@@ -15,14 +15,12 @@ module.exports = {
                 }
 
                 //'spread' type exchange
-                channel.assertExchange(exchangeName, 'fanout', {
+                channel.assertExchange(exchangeName, 'topic', {
                     durable: false
                 });
 
-                setTimeout(() => {
-                    channel.publish(exchangeName, '', Buffer.from(JSON.stringify(message)));
-                    console.log(`Message sent ${message.id} in ${delay}ms`);
-                }, delay)
+                channel.publish(exchangeName, orderPlaceStartTopic, Buffer.from(JSON.stringify(message)));
+                console.log(`[frontend-producer] ${new Date()} Message sent ${message.id}`);
             });
         });
     }

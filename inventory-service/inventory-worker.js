@@ -1,6 +1,7 @@
 const amqp = require('amqplib/callback_api');
 const opt = { credentials: require('amqplib').credentials.plain('root', 'root') };
-const exchangeName = 'order_exchange'
+const orderPlaceStartTopic = 'order.place.start';
+const orderExchangeName = 'order_exchange'
 
 amqp.connect('amqp://localhost', opt, function (error0, connection) {
     if (error0) {
@@ -11,7 +12,7 @@ amqp.connect('amqp://localhost', opt, function (error0, connection) {
             throw error1;
         }
 
-        channel.assertExchange(exchangeName, 'fanout', {
+        channel.assertExchange(orderExchangeName, 'topic', {
             durable: false
         });
 
@@ -21,17 +22,14 @@ amqp.connect('amqp://localhost', opt, function (error0, connection) {
             if (error2) {
                 throw error2;
             }
-            console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q.queue);
-            channel.bindQueue(q.queue, exchangeName, '');
-            channel.prefetch(1)
+            console.log(' [*] Waiting for logs. To exit press CTRL+C');
+
+            channel.bindQueue(q.queue, orderExchangeName, orderPlaceStartTopic);
 
             channel.consume(q.queue, function (msg) {
-                if (msg.content) {
-                    console.log(" [x] %s", msg.content.toString());
-                }
-                channel.ack(msg)
+                console.log(" [inventory-worker] %s %s:'%s'", new Date(), msg.fields.routingKey, msg.content.toString());
             }, {
-                noAck: false
+                noAck: true
             });
         });
     });

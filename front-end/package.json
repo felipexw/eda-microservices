@@ -6,8 +6,7 @@
   "author": "Felipe Appio <felipexw@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "run:dev": "node index port=3000",
-    "start-gendoc": "node swagger.js"
+    "start:dev": "node swagger.js port=5000"
   },
   "dependencies": {
     "amqplib": "^0.7.1",
