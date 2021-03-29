@@ -5,14 +5,20 @@
   "repository": "https://github.com/felipexw/eda-microservices.git",
   "author": "Felipe Appio <felipexw@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "run:dev": "node index port=3000",
+    "start-gendoc": "node swagger.js"
+  },
   "dependencies": {
     "amqplib": "^0.7.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "http": "^0.0.1-security",
+    "swagger-autogen": "^2.7.6",
     "swagger-ui-express": "^4.1.6"
   },
   "node": {
     "version": "~v15.12.0"
   }
-
 }
