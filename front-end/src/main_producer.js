@@ -1,7 +1,7 @@
 const amqp = require('amqplib/callback_api');
 const opt = { credentials: require('amqplib').credentials.plain('root', 'root') };
 const exchangeName = 'order_exchange';
-const orderPlaceStartTopic = 'order.place.start';
+const orderPlaceStartTopic = 'order-place.start';
 
 module.exports = {
     produceMessage(message) {
