@@ -17,3 +17,4 @@ Simple implementation of an event driven architecture with RabbitMQ.
 
 # References
 - [messaging-patterns-for-event-driven-microservices](http://www.myspsolution.com/news-events/messaging-patterns-for-event-driven-microservices/)
+- [Mensageria e eventos](https://github.com/caelum/apostila-microservices-com-spring-cloud/blob/master/10-mensageria-e-eventos.md)
